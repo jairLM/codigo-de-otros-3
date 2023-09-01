@@ -8,56 +8,76 @@ const productos = [
   {nombre: "Zapato rojo", tipo: "zapato", color: "rojo", img: "./zapato-rojo.jpg"}
 ]
 
-const li = document.getElementsByName("lista-de-productos")
-const $i = document.querySelector('.input');
+const btn = document.getElementById('btn');  //guarde el elemento del boton en la variable btn
+btn.addEventListener('click', ()=>{
 
-for (let i = 0; i < productos.length; i++) {
-  var d = document.createElement("div")
-  d.classList.add("producto")
-
-  var ti = document.createElement("p")
-  ti.classList.add("titulo")
-  ti.textContent = productos[i].nombre
+  const listaProductos = document.getElementById("lista-de-productos") //se cambio a getElementsById
+  const input = document.querySelector('.input');
   
-  var imagen = document.createElement("img");
-  imagen.setAttribute('src', productos[i].img);
+  for (let i = 0; i < productos.length; i++) {
+    let div = document.createElement("div"); //se cambiaron el tipo de variables a let y se les cambio el nombre
+    div.classList.add("producto");
 
-  d.appendChild(ti)
-  d.appendChild(imagen)
-
-  li.appendChild(d)
-}
-
-displayProductos(productos)
-const botonDeFiltro = document.querySelector("button");
-
-botonDeFiltro.onclick = function() {
-  while (li.firstChild) {
-    li.removeChild(li.firstChild);
-  }
-
-  const texto = $i.value;
-  console.log(texto);
-  const productosFiltrados = filtrado(productos, texto );
-
-  for (let i = 0; i < productosFiltrados.length; i++) {
-    var d = document.createElement("div")
-    d.classList.add("producto")
+    console.log(div);
   
-    var ti = document.createElement("p")
-    ti.classList.add("titulo")
-    ti.textContent = productosFiltrados[i].nombre
+    let parrafo = document.createElement("p") //se cambiaron el tipo de variables a let y se les cambio el nombre
+    parrafo.classList.add("titulo")
+    parrafo.textContent = productos[i].nombre
+
+    console.log(parrafo);
     
-    var imagen = document.createElement("img");
-    imagen.setAttribute('src', productosFiltrados[i].img);
-  
-    d.appendChild(ti)
-    d.appendChild(imagen)
-  
-    li.appendChild(d)
-  }
-}
+    let imagen = document.createElement("img");
+    imagen.setAttribute('src', productos[i].img);
 
-const filtrado = (productos = [], texto) => {
-  return productos.filter(item => item.tipo.includes(texto) || item.color.includes(texto));
-}  
+    let div2 = document.createElement("div");//se cambiaron el tipo de variables a let y se les cambio el nombre
+    div2.appendChild(parrafo)
+    div2.appendChild(imagen)
+    let li = document.createElement("div");
+    li.appendChild(div2);
+
+    //const botonDeFiltro = document.querySelector("button");
+  
+   // botonDeFiltro.onclick = function() {   
+    while (li.firstChild) {
+      li.removeChild(li.firstChild);
+    }
+
+  //}
+  
+   //displayProductos(productos)  se booro este codigo 
+  
+  
+    const texto = input.value;
+    console.log(texto);
+    const productosFiltrados = filtrado(productos, texto );
+  
+    for (let i = 0; i < productosFiltrados.length; i++) {
+      let div = document.createElement("div") //se cambiaron el tipo de variables a let y se les cambio el nombre
+      div.classList.add("producto")
+    
+      let parrafo = document.createElement("p") //se cambiaron el tipo de variables a let y se les cambio el nombre
+      parrafo.classList.add("titulo")
+      parrafo.textContent = productosFiltrados[i].nombre
+      
+      let imagen = document.createElement("img"); //se cambiaron el tipo de variables a let y se les cambio el nombre
+      imagen.setAttribute('src', productosFiltrados[i].img);
+    
+      div.appendChild(parrafo)
+      div.appendChild(imagen)
+    
+      listaProductos.appendChild(div)
+      
+    
+
+    }
+  }
+  
+  function filtrado (productos = [], texto) {
+    return productos.filter(item => item.tipo.includes(texto) || item.color.includes(texto));
+  }  
+
+
+
+
+
+});
